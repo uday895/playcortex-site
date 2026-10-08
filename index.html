@@ -871,7 +871,7 @@ nav .btn{padding:11px 18px}
   <div class="ctab rv">
         <h2>Talent should decide how far you go, <span class="o">not access</span></h2>
     <p>We onboard athletes in small groups. Drop your WhatsApp and we'll message you when it's your turn.</p>
-    <form class="su" onsubmit="event.preventDefault();const i=this.querySelector('input');if(!i.value.trim()){i.focus();return;}const b=this.querySelector('button');b.textContent='Joined ✓';b.classList.add('done');this.classList.add('done');i.disabled=true;b.disabled=true;"><input type="tel" placeholder="WhatsApp number" aria-label="WhatsApp number"><button class="btn btn-o">Join <span class="ar">→</span></button></form>
+    <form class="su" onsubmit="event.preventDefault();const i=this.querySelector('input');if(i.value.replace(/\D/g,'').length<10){i.focus();return;}pcSave(i.value);const b=this.querySelector('button');b.textContent='Joined ✓';b.classList.add('done');this.classList.add('done');i.disabled=true;b.disabled=true;"><input type="tel" placeholder="WhatsApp number" aria-label="WhatsApp number"><button class="btn btn-o">Join <span class="ar">→</span></button></form>
   </div>
 </section>
 
@@ -1022,5 +1022,6 @@ $$('.flip').forEach(f=>{f.addEventListener('click',()=>f.classList.toggle('on'))
 /* faq */
 $$('.q').forEach(q=>q.querySelector('button').addEventListener('click',()=>{const open=q.classList.contains('open');$$('.q').forEach(x=>{x.classList.remove('open');x.querySelector('.a').style.maxHeight=0});if(!open){q.classList.add('open');const a=q.querySelector('.a');a.style.maxHeight=a.scrollHeight+'px';}}));
 </script>
+<script>const PC_SHEET_URL='https://script.google.com/macros/s/AKfycbxKrHTl3pDPZwBhFLbrFvARP-10PgIYSAayVOHdaK-twtHeCE047bX54yzx-e024g/exec';function pcSave(n){if(PC_SHEET_URL.indexOf('https://')!==0)return;const d=new URLSearchParams({number:n.trim(),page:location.hostname+location.pathname});fetch(PC_SHEET_URL,{method:'POST',mode:'no-cors',body:d}).catch(()=>{});}</script>
 </body>
 </html>
