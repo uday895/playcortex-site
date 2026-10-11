@@ -311,6 +311,29 @@ nav .btn{padding:10px 18px;font-size:14px}
 .su input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:16px var(--b);padding:0 18px;color:#fff}
 .su input::placeholder{color:#76706a}
 .su .btn{padding:13px 20px}
+.sf{width:min(560px,100%);margin:34px auto 0;text-align:left;display:grid;gap:10px}
+.sf fieldset{border:0;margin:0;padding:0}
+.sf legend{font:600 12px var(--b);letter-spacing:.14em;text-transform:uppercase;color:#76706a;margin-bottom:10px;padding:0}
+.sf-chips{display:flex;flex-wrap:wrap;gap:6px}
+.sf-chips label{cursor:pointer}
+.sf-chips input{position:absolute;opacity:0;pointer-events:none}
+.sf-chips span{display:block;padding:10px 14px;border:1px solid #2e2c2a;background:#1c1b1a;border-radius:8px;font:15px var(--b);color:#c9c2b8;transition:.2s}
+.sf-chips label:hover span{border-color:#4a4642}
+.sf-chips input:checked+span{background:var(--or);border-color:var(--or);color:#fff}
+.sf-chips input:focus-visible+span{outline:2px solid var(--or);outline-offset:2px}
+.sf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sf input[type=text],.sf input[type=tel],.sf textarea{width:100%;border:1px solid #2e2c2a;background:#1c1b1a;border-radius:8px;outline:0;font:16px var(--b);color:#fff;padding:15px 16px;transition:border-color .2s}
+.sf textarea{resize:vertical;min-height:58px;line-height:1.45}
+.sf input::placeholder,.sf textarea::placeholder{color:#76706a}
+.sf input:focus,.sf textarea:focus{border-color:#5a5550}
+.sf .bad{border-color:#d9583b!important}
+.sf-err{margin:0!important;min-height:0;font-size:14px!important;color:#ef8a6c!important;text-align:left}
+.sf-err:empty{display:none}
+.sf .btn{justify-self:start;padding:14px 26px}
+.sf .btn.done{background:#2FA36B}
+.sf.done{opacity:.85}
+@media(max-width:560px){.sf-row{grid-template-columns:1fr}.sf .btn{justify-self:stretch;justify-content:center}}
+
 footer{padding:60px 0 30px;font-size:14px}
 .fgd{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:30px}
 footer .lgf img{height:19px}
@@ -397,11 +420,13 @@ footer .c a:hover{color:var(--or)}
 .team{background-color:var(--paper);background-image:radial-gradient(#D6D0C6 1.1px,transparent 1.2px);background-size:22px 22px}
 .team h2.big2{font-size:clamp(60px,8vw,120px);line-height:.9;letter-spacing:-.055em}
 .team h2.big2 .sv{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--or);font-size:.62em;letter-spacing:-.02em;display:block}
-.polg{display:grid;grid-template-columns:repeat(2,minmax(0,360px));justify-content:center;gap:64px;margin-top:20px;padding:20px 10px}
+.polg{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:20px;padding:20px 10px}
 .pol{background:#fff;padding:12px 12px 16px;box-shadow:0 30px 50px -28px rgba(0,0,0,.4);transition:transform .6s var(--e),rotate .6s var(--e);position:relative}
 .pol:nth-child(1){rotate:-3deg}.pol:nth-child(2){rotate:2deg;margin-top:44px}.pol:nth-child(3){rotate:-1.5deg;margin-top:12px}
 .pol:hover{rotate:0deg;transform:translateY(-6px)}
 .pol .ph{aspect-ratio:4/4.6;overflow:hidden;background:var(--card)}
+.pol .ph-mono{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#ece9e4,#d9d4cc)}.pol .ph-mono span{font:700 clamp(56px,7vw,96px)/1 var(--d);letter-spacing:-.04em;color:#b9b2a8}
+
 .pol img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.06);transition:filter .7s}
 .pol:hover img{filter:none}
 .pol .n{position:absolute;right:14px;top:18px;z-index:2;font:600 11px var(--b);color:#fff;background:var(--or);border-radius:8px;padding:3px 9px}
@@ -841,10 +866,11 @@ nav .btn{padding:11px 18px}
 <section class="team" id="team">
   <div class="w">
     <div class="sh"><h2 class="big2 rv"><span class="sv">The</span>TEAM</h2>
-      <p class="tline rv d1">26 years of competitive sport between us, and relationships across Indian sport built over a lifetime in it.</p></div>
+      <p class="tline rv d1">36 years of competitive sport between us, and relationships across Indian sport built over a lifetime in it.</p></div>
     <div class="polg">
       <figure class="pol rv"><div class="ph"><img data-img="krishang" alt="Krishang Raghuvanshi"></div><div class="cap"><b>Krishang Raghuvanshi</b><span>CO-FOUNDER</span></div><p>Tennis, 14 years. Junior India No. 2, trained in Barcelona, until a hip injury and burnout.</p></figure>
       <figure class="pol rv d1"><div class="ph"><img data-img="uday" alt="Uday Verdi Jain"></div><div class="cap"><b>Uday Verdi Jain</b><span>CO-FOUNDER</span></div><p>Cricket, 12 years. Delhi U19 and U23 probable, until an ACL tear ended it.</p></figure>
+      <figure class="pol rv d2"><div class="ph ph-mono"><span>JS</span></div><div class="cap"><b>Jivitesh Sharma</b><span>CTO</span></div><p>Tennis, 10 years. State level, and now 5+ years building production AI.</p></figure>
     </div>
   </div>
 </section>
@@ -869,8 +895,8 @@ nav .btn{padding:11px 18px}
 <section class="cta" id="join">
   <div class="ctab rv">
         <h2>Talent should decide how far you go, <span class="o">not access</span></h2>
-    <p>We onboard athletes in small groups. Drop your WhatsApp and we'll message you when it's your turn.</p>
-    <form class="su" onsubmit="event.preventDefault();const i=this.querySelector('input');if(i.value.replace(/\D/g,'').length<10){i.focus();return;}pcSave(i.value);const b=this.querySelector('button');b.textContent='Joined ✓';b.classList.add('done');this.classList.add('done');i.disabled=true;b.disabled=true;"><input type="tel" placeholder="WhatsApp number" aria-label="WhatsApp number"><button class="btn btn-o">Join <span class="ar">→</span></button></form>
+    <p>We onboard in small groups. Tell us who you are and we'll message you on WhatsApp when it's your turn.</p>
+    <form class="sf" novalidate onsubmit="return pcSubmit(event,this)"><fieldset class="sf-role"><legend>I am</legend><div class="sf-chips"><label><input type="radio" name="role" value="Academy"><span>Academy</span></label><label><input type="radio" name="role" value="Athlete"><span>Athlete</span></label><label><input type="radio" name="role" value="Coach"><span>Coach</span></label><label><input type="radio" name="role" value="Organisation"><span>Organisation</span></label><label><input type="radio" name="role" value="Other"><span>Other</span></label></div></fieldset><div class="sf-row"><input name="name" type="text" autocomplete="name" placeholder="Your name" aria-label="Your name"><input name="number" type="tel" autocomplete="tel" placeholder="WhatsApp number" aria-label="WhatsApp number"></div><textarea name="topic" rows="2" placeholder="Anything specific you'd like to discuss? (optional)" aria-label="Anything specific you'd like to discuss (optional)"></textarea><p class="sf-err" aria-live="polite"></p><button class="btn btn-o">Join <span class="ar">→</span></button></form>
   </div>
 </section>
 
@@ -1021,6 +1047,6 @@ $$('.flip').forEach(f=>{f.addEventListener('click',()=>f.classList.toggle('on'))
 /* faq */
 $$('.q').forEach(q=>q.querySelector('button').addEventListener('click',()=>{const open=q.classList.contains('open');$$('.q').forEach(x=>{x.classList.remove('open');x.querySelector('.a').style.maxHeight=0});if(!open){q.classList.add('open');const a=q.querySelector('.a');a.style.maxHeight=a.scrollHeight+'px';}}));
 </script>
-<script>const PC_SHEET_URL='https://script.google.com/macros/s/AKfycbxKrHTl3pDPZwBhFLbrFvARP-10PgIYSAayVOHdaK-twtHeCE047bX54yzx-e024g/exec';function pcSave(n){if(PC_SHEET_URL.indexOf('https://')!==0)return;const d=new URLSearchParams({number:n.trim(),page:location.hostname+location.pathname});fetch(PC_SHEET_URL,{method:'POST',mode:'no-cors',body:d}).catch(()=>{});}</script>
+<script>const PC_SHEET_URL='https://script.google.com/macros/s/AKfycbxKrHTl3pDPZwBhFLbrFvARP-10PgIYSAayVOHdaK-twtHeCE047bX54yzx-e024g/exec';function pcSave(d){if(PC_SHEET_URL.indexOf('https://')!==0)return;const b=new URLSearchParams(Object.assign({},d,{page:location.hostname+location.pathname}));fetch(PC_SHEET_URL,{method:'POST',mode:'no-cors',body:b}).catch(()=>{});}function pcSubmit(e,f){e.preventDefault();if(f.classList.contains('done'))return false;const err=f.querySelector('.sf-err');f.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));const role=(f.querySelector('input[name=role]:checked')||{}).value||'';const name=f.name.value.trim(),num=f.number.value.trim(),topic=f.topic.value.trim();let msg='';if(!role)msg='Pick what describes you best.';else if(name.length<2){msg='Add your name.';f.name.classList.add('bad');f.name.focus();}else if(num.replace(/\D/g,'').length<10){msg='Add a valid WhatsApp number.';f.number.classList.add('bad');f.number.focus();}err.textContent=msg;if(msg)return false;pcSave({role:role,name:name.slice(0,80),number:num,topic:topic.slice(0,500)});const b=f.querySelector('button');b.textContent='Joined ✓';b.classList.add('done');f.classList.add('done');f.querySelectorAll('input,textarea,button').forEach(x=>x.disabled=true);return false;}</script>
 </body>
 </html>
