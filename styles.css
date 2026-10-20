@@ -3256,3 +3256,6 @@ body.scrolled .nav{box-shadow:0 10px 30px -18px rgba(60,30,10,.28)}
 .cm-join{align-items:center!important}
 .cm-join p{max-width:none!important}
 .cm-join .pill i{font-style:normal}
+/* v79 · two-person leadership grid */
+.lead3{grid-template-columns:repeat(2,1fr)!important;max-width:720px!important}
+@media (max-width:640px){.lead3{grid-template-columns:1fr!important;max-width:320px!important}}
