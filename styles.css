@@ -3386,3 +3386,12 @@ body.pg-kru.scrolled .nav{background:rgba(244,242,238,.75)!important}
 #products .gx-k{display:inline-flex!important;flex-direction:column;align-items:center;gap:8px!important}
 #products .gx-k::before{display:none}
 #products .gx-k::after{content:"";width:32px;height:2px;background:#EE5D26;border-radius:2px}
+/* v86 · hero copy breathes: lighter, roomier line, more air around it */
+.gx-sub{line-height:1.75!important;letter-spacing:.005em;max-width:600px!important;color:#7A736B!important}
+@media (max-width:640px){
+  .gx-hero{padding:150px 0 80px!important}
+  .gx-logo img{height:40px!important}
+  .gx-sub{font-size:15px!important;line-height:1.85!important;max-width:300px!important;margin-top:34px!important;padding:0 6px}
+  .gx-hero+.px-sec#products{padding-top:72px!important}
+}
+@media (max-width:640px){.gx-sub{max-width:320px!important;text-wrap:balance}}
