@@ -615,8 +615,10 @@ $$('.macc2').forEach(b => b.addEventListener('click', () => {
   ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, stop, { once: true, passive: true }));
   setTimeout(() => {
     if (cancelled || scrollY > 4) return;
-    const target = prod.getBoundingClientRect().top + scrollY - innerHeight * 0.16;
-    const dist = Math.min(Math.max(target, 0), innerHeight * 0.45);
+    const sub = hero.querySelector('.gx-sub'), nav = document.getElementById('nav'), hh = nav ? nav.offsetHeight : 68;
+    /* stop when the hero line is half tucked under the header, so the lead-in and "Introducing KRU" sit right below it */
+    const target = sub ? sub.getBoundingClientRect().top + scrollY + sub.offsetHeight / 2 - hh : prod.getBoundingClientRect().top + scrollY - innerHeight * 0.16;
+    const dist = Math.min(Math.max(target, 0), innerHeight * 0.6);
     if (dist < 24) return;
     const start = scrollY, t0 = performance.now(), dur = 900, ease = t => 1 - Math.pow(1 - t, 3);
     const step = now => { if (cancelled) return; const k = Math.min(1, (now - t0) / dur); scrollTo(0, start + dist * ease(k)); if (k < 1) requestAnimationFrame(step); };

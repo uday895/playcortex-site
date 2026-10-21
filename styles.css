@@ -3379,3 +3379,6 @@ body.pg-kru.scrolled .nav{background:rgba(244,242,238,.75)!important}
   .gx-logo img{height:clamp(44px,5.6vw,72px)!important}
   .hx+.px-sec#products,.gx-hero+.px-sec#products{padding-top:28px!important}
 }
+/* v84 · softer lead-in above "Introducing KRU": plain sentence case, no tag, no tracking */
+#products .gx-k{display:inline-flex!important;align-items:center;gap:10px;background:none!important;padding:0!important;border-radius:0!important;text-transform:none!important;letter-spacing:0!important;font:500 17px/1.3 var(--b)!important;color:#6B655E!important;margin-bottom:12px!important}
+#products .gx-k::before{content:"";width:28px;height:2px;background:#EE5D26;border-radius:2px}
