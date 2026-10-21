@@ -3259,3 +3259,87 @@ body.scrolled .nav{box-shadow:0 10px 30px -18px rgba(60,30,10,.28)}
 /* v79 · two-person leadership grid */
 .lead3{grid-template-columns:repeat(2,1fr)!important;max-width:720px!important}
 @media (max-width:640px){.lead3{grid-template-columns:1fr!important;max-width:320px!important}}
+
+
+/* ===== v69 · warm grainy orange wallpaper for every Mac / motion-graphic background ===== */
+:root{
+  --ow:radial-gradient(55% 45% at 72% 72%,rgba(232,92,80,.95),transparent 70%),
+       radial-gradient(60% 50% at 20% 85%,rgba(250,196,170,.95),transparent 70%),
+       radial-gradient(70% 55% at 80% 20%,rgba(244,172,82,.95),transparent 70%),
+       radial-gradient(60% 50% at 10% 10%,rgba(236,104,82,.95),transparent 70%),
+       linear-gradient(160deg,#ec6a52 0%,#f3a560 45%,#f2b36a 60%,#e9786a 100%);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.kwall,.kx-scr,.fx-stage,.acc-r,.mbp-scr{background:var(--grain),var(--ow)!important;background-blend-mode:soft-light,normal!important;background-size:220px 220px,cover!important}
+/* menu bars and dock tuned for the warmer wallpaper */
+.kpw-menu,.kx-menu{background:rgba(255,240,230,.32)!important}
+.kwall,.kx-scr,.fx-stage,.acc-r,.mbp-scr{background-size:220px 220px,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%!important;background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;background-blend-mode:soft-light,normal,normal,normal,normal,normal!important}
+
+/* ===== v70 · Features app windows: softer, native-feeling UI ===== */
+.fx-stage .win{border-radius:14px!important;overflow:hidden}
+.fx-stage .scr,.fx-stage .screens{background:#fbfaf8!important;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",var(--b)!important}
+.fx-stage .scr *{font-family:inherit;letter-spacing:normal!important}
+.fx-stage .a-h{font:700 20px/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif!important;text-transform:none!important;letter-spacing:-.015em!important;color:#1d1d1f}
+.fx-stage .a-s{font-size:12.5px!important;color:#8a867e!important;margin-top:2px}
+.fx-stage .a-meta span{font:500 11.5px -apple-system,sans-serif!important;text-transform:none!important;color:#8a867e!important}
+/* chat */
+.fx-stage .a-msg.me{background:#ee5d26!important;color:#fff;border-radius:18px 18px 5px 18px!important;font-size:13px!important;padding:9px 13px!important}
+.fx-stage .a-who{align-items:flex-start;gap:10px!important}
+.fx-stage .a-who>i{width:30px!important;height:30px!important;border-radius:50%!important;background:#2b7de9!important;color:#fff!important;font-size:11px!important}
+.fx-stage .a-who>i.s{background:#7c5cff!important}
+.fx-stage .a-who>div{background:#fff;border:1px solid #ebe7df;border-radius:5px 18px 18px 18px;padding:9px 12px}
+.fx-stage .a-who b{font:600 12.5px -apple-system,sans-serif!important;text-transform:none!important}
+.fx-stage .a-who small{font-size:10.5px!important;color:#ee5d26!important;text-transform:none!important;font-weight:500!important}
+.fx-stage .a-who p{font-size:13px!important;color:#3a3a3c!important;margin-top:3px!important}
+.fx-stage .compose div{border-radius:20px!important;border-color:#e3e0d8!important;font-size:12.5px!important}
+.fx-stage .compose span{border-radius:50%!important;width:36px!important;height:36px!important;background:#ee5d26!important}
+/* buttons: soft pills, orange or white only */
+.fx-stage .a-btn{border-radius:12px!important;font:600 13px -apple-system,sans-serif!important;text-transform:none!important;letter-spacing:0!important;padding:11px!important;background:#ee5d26!important;color:#fff!important;border:0!important}
+.fx-stage .a-btn.k{background:#ee5d26!important;color:#fff!important}
+.fx-stage .a-btn.g{background:#fff!important;color:#1d1d1f!important;border:1px solid #e3e0d8!important}
+/* options */
+.fx-stage .a-opt{border-radius:12px!important;font-size:13.5px!important;font-weight:500!important;border:1px solid #e9e5dd!important;background:#fff!important}
+.fx-stage .a-opt.sel{background:#fff4ee!important;border:1.5px solid #ee5d26!important;color:#c2410c!important}
+.fx-stage .a-opt.note{font-weight:400!important;color:#3a3a3c!important;line-height:1.45}
+.fx-stage .a-note{background:#fff4ee!important;border:1px solid #f6d3c3;border-radius:12px!important;font-size:13px!important;color:#55524c}
+.fx-stage .a-note b{color:#c2410c}
+/* plan */
+.fx-stage .a-blk.focus{background:#fff!important;color:#1d1d1f!important;border:1px solid #ebe7df;border-left:3px solid #ee5d26!important;border-radius:12px!important}
+.fx-stage .a-blk.focus::after,.fx-stage .a-blk.focus::before{display:none!important}
+.fx-stage .a-blk.focus small{color:#c2410c!important;font:600 11px -apple-system,sans-serif!important;text-transform:none!important}
+.fx-stage .a-blk.focus b{font:700 17px -apple-system,sans-serif!important;text-transform:none!important;color:#1d1d1f!important}
+.fx-stage .ph{border-radius:12px!important;border:1px solid #ebe7df!important;background:#fff!important}
+.fx-stage .ph i{background:#1f9d55!important;color:#fff!important}
+.fx-stage .ph.now{border:1.5px solid #ee5d26!important;background:#fff8f4!important}
+.fx-stage .ph.now i{background:#ee5d26!important}
+.fx-stage .ph b{font-size:13.5px!important;font-weight:600!important}
+/* games */
+.fx-stage .a-blk.arena{background:#fff4ee!important;border:1px solid #f6d3c3;border-radius:14px!important}
+.fx-stage .a-blk.arena .wait{border-color:#ee5d26!important;border-radius:12px!important;background:#fff!important;color:#ee5d26!important}
+.fx-stage .a-stats>div{border-radius:12px!important;border:1px solid #ebe7df!important;background:#fff!important}
+.fx-stage .a-stats b{font:700 18px -apple-system,sans-serif!important}
+.fx-stage .a-stats small{font-size:11px!important;color:#8a867e!important}
+.fx-stage .sum-big{font:700 46px/1 -apple-system,BlinkMacSystemFont,sans-serif!important;letter-spacing:-.03em!important}
+.fx-stage .a-stats small{display:block;line-height:1.35!important;margin-top:2px}
+/* v71 · no orange left bars anywhere */
+.fx-stage .a-blk.focus{border:1px solid #ebe7df!important;border-left:1px solid #ebe7df!important;display:flex;align-items:center;gap:12px;padding:14px 16px!important}
+.fx-stage .a-blk.focus small{color:#8a867e!important;font-weight:500!important}
+.hv-plan,.kp-phone .tt-hero{border-left:1px solid #ebe7df!important}
+.hv-plan small{color:#8a867e!important}
+.fx-stage .fic{flex:none;width:38px;height:38px;border-radius:10px;background:#fff4ee;display:grid;place-items:center;font-size:18px}.fx-stage .a-blk.focus small{display:block}
+.legal .intro,.doc .intro{border-left:0!important;padding-left:0!important}
+#f-how .px-lead p{max-width:920px!important}#f-how .px-head.px-lead{max-width:none}
+.hx .px-sub{max-width:900px!important}
+
+/* v80 · warm wallpaper wins over the earlier KRU-colour wallpaper; coach avatars stay in Cortex colours */
+html body .kwall,html body .kx-scr,html body .fx-stage,html body .acc-r,html body .mbp-scr,html body.pg-kru .kwall,html body.pg-kru .kx-scr,html body.pg-kru .fx-stage,html body.pg-kru .acc-r,html body.pg-kru .mbp-scr,html body.pg-kru #mac .mbp-scr{background:var(--grain),var(--ow)!important;background-size:220px 220px,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%!important;background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;background-blend-mode:soft-light,normal,normal,normal,normal,normal!important}
+html body .fx-stage .a-who>i{background:#111!important}
+html body .fx-stage .a-who>i.s{background:#9A3C14!important}
+/* v80 · top-left: PlayCortex icon only */
+.nav-logo img,.kru-home img{content:url(/assets/mk_ink.png)}
+.nav-logo img{height:30px!important;width:auto!important}
+.kru-home img{height:26px!important;width:auto!important}
+@media (max-width:640px){.nav-logo img{height:28px!important}.kru-home img{height:24px!important}}
+/* v80 · hero: PlayCortex wordmark in the middle */
+.gx-logo{margin:0 auto;line-height:0}
+.gx-logo img{display:block;margin:0 auto;height:clamp(44px,6.4vw,84px);width:auto;max-width:88vw}
