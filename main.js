@@ -602,3 +602,24 @@ $$('.macc2').forEach(b => b.addEventListener('click', () => {
   setTimeout(function(){requestAnimationFrame(tick)},250);
   rig.parentNode.addEventListener('click',function(){t0=null;shown=false;line.classList.remove('on');requestAnimationFrame(tick)});
 })();
+
+/* v83 · landing page: a short, gentle auto-scroll so the KRU section peeks in on arrival.
+   Only on the home page, only from the very top, never with a #link, skipped for reduced motion,
+   and cancelled the moment the visitor scrolls, taps or presses a key themselves. */
+(() => {
+  const hero = document.querySelector('.gx-hero'), prod = document.getElementById('products');
+  if (!hero || !prod || location.hash) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let cancelled = false;
+  const stop = () => { cancelled = true; };
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, stop, { once: true, passive: true }));
+  setTimeout(() => {
+    if (cancelled || scrollY > 4) return;
+    const target = prod.getBoundingClientRect().top + scrollY - innerHeight * 0.16;
+    const dist = Math.min(Math.max(target, 0), innerHeight * 0.45);
+    if (dist < 24) return;
+    const start = scrollY, t0 = performance.now(), dur = 900, ease = t => 1 - Math.pow(1 - t, 3);
+    const step = now => { if (cancelled) return; const k = Math.min(1, (now - t0) / dur); scrollTo(0, start + dist * ease(k)); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }, 1100);
+})();
