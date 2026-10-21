@@ -623,5 +623,5 @@ $$('.macc2').forEach(b => b.addEventListener('click', () => {
     const start = scrollY, t0 = performance.now(), dur = 900, ease = t => 1 - Math.pow(1 - t, 3);
     const step = now => { if (cancelled) return; const k = Math.min(1, (now - t0) / dur); scrollTo(0, start + dist * ease(k)); if (k < 1) requestAnimationFrame(step); };
     requestAnimationFrame(step);
-  }, 1100);
+  }, 2300);
 })();
