@@ -3337,9 +3337,20 @@ html body .fx-stage .a-who>i{background:#111!important}
 html body .fx-stage .a-who>i.s{background:#9A3C14!important}
 /* v80 · top-left: PlayCortex icon only */
 
-.nav-logo img{height:30px!important;width:auto!important}
-.kru-home img{height:26px!important;width:auto!important}
-@media (max-width:640px){.nav-logo img{height:28px!important}.kru-home img{height:24px!important}}
 /* v80 · hero: PlayCortex wordmark in the middle */
 .gx-logo{margin:0 auto;line-height:0}
 .gx-logo img{display:block;margin:0 auto;height:clamp(44px,6.4vw,84px);width:auto;max-width:88vw}
+
+/* v81 · header strip blends into the page: translucent, blurred, no hard fill; firms up softly on scroll */
+.nav,.pg-kru .nav{background:rgba(255,255,255,.42)!important;-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.55)!important;box-shadow:none}
+.pg-kru .nav{background:rgba(244,242,238,.5)!important;border-color:rgba(255,255,255,.45)!important}
+body.scrolled .nav{background:rgba(255,255,255,.72)!important;box-shadow:0 8px 28px -20px rgba(60,30,10,.25)!important}
+body.pg-kru.scrolled .nav{background:rgba(244,242,238,.78)!important}
+.mnav{background:rgba(255,255,255,.9)!important;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.burger{background:rgba(255,255,255,.6)!important}
+/* landing page: no logo in the header, links start at the left */
+.nav-links:first-child{margin-left:6px}
+/* mobile menu: fully hidden when closed (no strip peeking above the header) */
+.mnav:not(.op){opacity:0;visibility:hidden;pointer-events:none}
+.mnav{transition:transform .45s var(--e),opacity .3s ease,visibility 0s linear .45s!important}
+.mnav.op{opacity:1;visibility:visible;transition:transform .45s var(--e),opacity .3s ease,visibility 0s!important}
