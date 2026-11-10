@@ -455,7 +455,7 @@ $$('select[data-lang]').forEach(sel => {
   sel.addEventListener('change', () => {
     /* v77: clean URLs (no .html) */
     const clean = p => { p = p.replace(/\.html$/, '').replace(/(^|\/)index$/, ''); return '/' + p.replace(/\/$/, ''); };
-    location.href = clean((sel.value === 'hi' ? 'hi/' : '') + sel.dataset.path) + location.hash;
+    (window.__go || (u => location.href = u))(clean((sel.value === 'hi' ? 'hi/' : '') + sel.dataset.path) + location.hash);
   });
 });
 
