@@ -293,11 +293,12 @@ const pcSave = d => { let pg = ''; try { pg = top.location.hostname + top.locati
   const f = $('#su'); if (!f) return;
   f.addEventListener('submit', e => {
     e.preventDefault();
-    const i = $('input', f), b = $('button', f), v = i.value.trim();
+    const n = $('.su-name', f), i = $('.su-tel', f) || $('input[type=tel]', f), b = $('button', f), v = i.value.trim(), nm = n ? n.value.trim() : '';
+    if (n && !nm) { n.focus(); f.classList.add('err'); return; }
     if (!/^[+\d][\d\s-]{6,}$/.test(v)) { i.focus(); f.classList.add('err'); return; }
     f.classList.remove('err');
-    pcSave({ role: 'KRU early access', name: '', number: v, topic: 'KRU early access' });
-    b.textContent = 'Joined ✓'; f.classList.add('done'); i.disabled = true; b.disabled = true;
+    pcSave({ role: 'KRU early access', name: nm.slice(0, 80), number: v, topic: 'KRU early access' });
+    b.textContent = 'Joined ✓'; f.classList.add('done'); $$('input', f).forEach(x => x.disabled = true); b.disabled = true;
   });
 })();
 $$('.cform').forEach(f => {

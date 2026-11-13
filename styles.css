@@ -716,6 +716,8 @@ footer .pc-line{font-size:13px;margin-top:8px;max-width:280px}
 .cs-card a:hover{color:var(--or)}
 .cs-warn{background:var(--peach);border-color:#f3cdb7}.cs-warn p{font-size:13.5px;color:#7a3a1d}
 .su.err{border-color:#c0391b}
+.su .su-name{flex:.8;border-right:1px solid #2e2c2a}
+@media(max-width:560px){.su{flex-wrap:wrap}.su .su-name,.su .su-tel{flex:1 1 100%;padding:12px 14px;border-right:0}.su .su-name{border-bottom:1px solid #2e2c2a}.su .btn{flex:1 1 100%;justify-content:center}}
 .btn-dk{border-color:rgba(255,255,255,.3)!important;color:#fff}.btn-dk:hover{background:#fff!important;color:#111!important}
 
 /* legal page */
@@ -1877,6 +1879,7 @@ h1 .o,h2 .o,h3 .o,h1 .o2,h2 .o2,h3 .o2,.px-h1 .o,.fill em.wd{color:inherit!impor
 .su{background:#fff!important;border:1px solid var(--line)!important}
 .su input{color:var(--ink)!important}
 .su input::placeholder{color:var(--mt)!important}
+.su .su-name{border-color:var(--line)!important}
 .pb-go{color:var(--ink)}
 
 /* ===== v18 · KRU hero, Perk layout ===== */
