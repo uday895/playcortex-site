@@ -3456,3 +3456,7 @@ body.home main>section,body.home main>div,body.home footer{animation:pcFade .8s 
   .ig-h .ig-acc{margin:0;flex-shrink:0}
   .ig-h h2{max-width:none!important;white-space:nowrap}
 }
+
+/* v80 · home: KRU clip sits in the hero, under the description */
+.gx-hero .gx-vid{margin:52px auto 0!important;position:relative;z-index:1}
+@media (max-width:640px){.gx-hero .gx-vid{margin-top:36px!important;border-radius:18px}}
