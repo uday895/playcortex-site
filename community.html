@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=5">
+<link rel="stylesheet" href="/styles.css?v=6">
 <link rel="stylesheet" href="/phone.css">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="alternate" hreflang="en" href="/community">
@@ -27,7 +27,7 @@
     <a href="/community" class="on">Community</a>
     <a href="/team">Team</a>
   </div>
-  <div class="nav-cta nav-pills"><a href="/contact" class="pill pill-or pill-sm">Contact us <i>›</i></a></div>
+  <div class="nav-cta nav-pills"><a href="/contact?topic=demo" class="pill pill-ln pill-sm" data-pcform="demo">Request demo <i>›</i></a><a href="/contact" class="pill pill-or pill-sm">Contact us <i>›</i></a></div>
   <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
 </nav>
 <div class="mnav" id="mnav">
@@ -36,7 +36,7 @@
   <a href="/community">Community</a>
   <a href="/team">Team</a>
   <a href="/contact">Contact</a>
-  <div class="mnav-cta"><a href="/contact" class="btn btn-k">Contact us</a></div>
+  <div class="mnav-cta"><a href="/contact" class="btn btn-k" data-pcform="demo">Request business demo</a><a href="/contact" class="btn btn-l">Contact us</a></div>
 </div>
 
 <main>
@@ -44,7 +44,7 @@
   <div class="w">
     <h1 class="fade" style="animation-delay:.1s">The Inner Game</h1>
     <p class="lead fade" style="animation-delay:.25s">A community for athletes, parents and coaches, about the side of sport nobody coaches.</p>
-    <div class="cta-row fade" style="animation-delay:.35s"><a href="https://community.playcortex.in" target="_blank" rel="noopener" class="pill pill-or">Join the community <i>›</i></a><a href="https://community.playcortex.in/assessment/" target="_blank" rel="noopener" class="pill pill-ln">Take the athlete quiz <i>›</i></a></div>
+    <div class="cta-row fade" style="animation-delay:.35s"><button type="button" class="pill pill-or" data-pcform="community">Join the community <i>›</i></button><a href="https://community.playcortex.in/assessment/" target="_blank" rel="noopener" class="pill pill-ln">Take the athlete quiz <i>›</i></a></div>
   </div>
 </section>
 
@@ -85,7 +85,7 @@
 <!-- JOIN -->
 <section class="px-sec">
   <div class="w">
-    <div class="dc-wide rv"><div><b>Be part of The Inner Game</b><p>Join 2,450+ athletes, parents and coaches. It's free.</p></div><a href="https://community.playcortex.in" target="_blank" rel="noopener" class="pill pill-or">Join the community <i>›</i></a></div>
+    <div class="dc-wide rv"><div><b>Be part of The Inner Game</b><p>Join 2,450+ athletes, parents and coaches. It's free.</p></div><button type="button" class="pill pill-or" data-pcform="community">Join the community <i>›</i></button></div>
   </div>
 </section>
 
@@ -115,6 +115,6 @@
   </div>
   <p class="w pxf-dis">PlayCortex LLP, Gurugram, India. KRU is a PlayCortex product. AI coaching can be wrong and is not medical advice; anything clinical is referred to a qualified practitioner.</p>
 </footer>
-<script src="/main.js?v=4"></script>
+<script src="/main.js?v=5"></script>
 </body>
 </html>

@@ -301,6 +301,59 @@ const pcSave = d => { let pg = ''; try { pg = top.location.hostname + top.locati
     b.textContent = 'Joined ✓'; f.classList.add('done'); $$('input', f).forEach(x => x.disabled = true); b.disabled = true;
   });
 })();
+/* ===== sign-up modals: [data-pcform="demo|expert|community"] opens a form that saves to the sheet ===== */
+(() => {
+  const hi = document.documentElement.lang === 'hi';
+  const T = hi ? {
+    close: 'बंद करें', name: 'आपका नाम', email: 'ईमेल', wa: 'WhatsApp', opt: '(वैकल्पिक)', city: 'शहर', msg: 'कुछ और बताना चाहें?', note: 'आपकी जानकारी सीधे PlayCortex टीम तक पहुँचती है।'
+  } : {
+    close: 'Close', name: 'Your name', email: 'Email', wa: 'WhatsApp', opt: '(optional)', city: 'City', msg: 'Anything else we should know?', note: 'Your details come straight to the PlayCortex team. No spam.'
+  };
+  const sel = (n, lab, opts) => `<label><span>${lab}</span><select name="${n}">${opts.map(o => `<option>${o}</option>`).join('')}</select></label>`;
+  const inp = (n, lab, type = 'text', req = true, ac = '') => `<label><span>${lab}${req ? '' : ' <em>' + T.opt + '</em>'}</span><input name="${n}" type="${type}"${req ? ' required' : ''}${ac ? ` autocomplete="${ac}"` : ''}></label>`;
+  const F = {
+    demo: hi ? {
+      k: 'बिज़नेस के लिए', h: 'बिज़नेस डेमो का अनुरोध करें', p: 'अकादमी, क्लब, स्कूल या S&C सेंटर? 20 मिनट में देखिए कि KRU आपके खिलाड़ियों के साथ कैसे काम करता है।', subject: 'Business demo request', btn: 'डेमो का अनुरोध भेजें',
+      body: `<div class="fr2">${inp('name', T.name, 'text', true, 'name')}${inp('org', 'संस्था का नाम', 'text', true, 'organization')}</div><div class="fr2">${sel('role', 'आप हैं', ['Academy', 'Club or team', 'School', 'S&C or physio centre', 'Federation or league', 'Other'])}${sel('size', 'कितने एथलीट', ['Under 25', '25 to 100', '100 to 500', '500+'])}</div><div class="fr2">${inp('email', T.email, 'email', true, 'email')}${inp('phone', T.wa, 'tel', false, 'tel')}</div>${inp('city', T.city, 'text', false)}`
+    } : {
+      k: 'For organisations', h: 'Request a business demo', p: 'Academy, club, school or S&C centre? See in 20 minutes how KRU works with your players, coaches and parents.', subject: 'Business demo request', btn: 'Request demo',
+      body: `<div class="fr2">${inp('name', T.name, 'text', true, 'name')}${inp('org', 'Organisation', 'text', true, 'organization')}</div><div class="fr2">${sel('role', 'We are', ['Academy', 'Club or team', 'School', 'S&C or physio centre', 'Federation or league', 'Other'])}${sel('size', 'Athletes', ['Under 25', '25 to 100', '100 to 500', '500+'])}</div><div class="fr2">${inp('email', T.email, 'email', true, 'email')}${inp('phone', T.wa, 'tel', false, 'tel')}</div>${inp('city', T.city, 'text', false)}`
+    },
+    expert: hi ? {
+      k: 'प्रैक्टिशनर्स के लिए', h: 'एक्सपर्ट नेटवर्क से जुड़ें', p: 'S&C, फ़िज़ियो, न्यूट्रिशन या स्पोर्ट्स साइकोलॉजी? अपना तरीका ज़्यादा एथलीटों तक पहुँचाइए।', subject: 'Practitioner application', btn: 'आवेदन भेजें',
+      body: `<div class="fr2">${inp('name', T.name, 'text', true, 'name')}${inp('email', T.email, 'email', true, 'email')}</div><div class="fr2">${sel('role', 'आपका क्षेत्र', ['Strength & conditioning', 'Physiotherapy', 'Nutrition', 'Sport psychology', 'Coaching', 'Other'])}${inp('phone', T.wa, 'tel', false, 'tel')}</div>${inp('exp', 'आप अभी कहाँ काम करते हैं?', 'text', false)}${inp('city', T.city, 'text', false)}`
+    } : {
+      k: 'For practitioners', h: 'Join the expert network', p: 'S&C, physio, nutrition or sport psychology? Take your method to more athletes, with PlayCortex handling the day to day.', subject: 'Practitioner application', btn: 'Send application',
+      body: `<div class="fr2">${inp('name', T.name, 'text', true, 'name')}${inp('email', T.email, 'email', true, 'email')}</div><div class="fr2">${sel('role', 'Discipline', ['Strength & conditioning', 'Physiotherapy', 'Nutrition', 'Sport psychology', 'Coaching', 'Other'])}${inp('phone', T.wa, 'tel', false, 'tel')}</div>${inp('exp', 'Where do you work now?', 'text', false)}${inp('city', T.city, 'text', false)}`
+    },
+    community: hi ? {
+      k: 'The Inner Game', h: 'कम्युनिटी से जुड़ें', p: 'एथलीट कहानियाँ, बातचीत और मेंटैलिटी टेस्ट, सीधे WhatsApp पर। एथलीट, पेरेंट्स और कोच, सबके लिए। मुफ़्त।', subject: 'Community sign-up', btn: 'साइन अप करें',
+      body: `<div class="fr2">${inp('name', T.name, 'text', true, 'name')}${inp('phone', T.wa, 'tel', true, 'tel')}</div><div class="fr2">${sel('role', 'आप हैं', ['Athlete', 'Parent', 'Coach', 'Practitioner', 'Other'])}${inp('sport', 'खेल', 'text', false)}</div>${inp('email', T.email, 'email', false, 'email')}`
+    } : {
+      k: 'The Inner Game', h: 'Join the community', p: 'Athlete stories, conversations and the mentality test, straight to your WhatsApp. For athletes, parents and coaches. Free.', subject: 'Community sign-up', btn: 'Sign me up',
+      body: `<div class="fr2">${inp('name', T.name, 'text', true, 'name')}${inp('phone', T.wa, 'tel', true, 'tel')}</div><div class="fr2">${sel('role', 'I am', ['Athlete', 'Parent', 'Coach', 'Practitioner', 'Other'])}${inp('sport', 'Sport', 'text', false)}</div>${inp('email', T.email, 'email', false, 'email')}`
+    }
+  };
+  const triggers = $$('[data-pcform]'); if (!triggers.length) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'pcm'; wrap.setAttribute('role', 'dialog'); wrap.setAttribute('aria-modal', 'true');
+  wrap.innerHTML = Object.entries(F).map(([k, c]) => `<div class="pcm-box" data-k="${k}" hidden><button class="pcm-x" type="button" aria-label="${T.close}">×</button><span class="pcm-k">${c.k}</span><h3>${c.h}</h3><p class="pcm-p">${c.p}</p><form class="cform" data-subject="${c.subject}" novalidate>${c.body}<div class="cf-foot"><button class="pill pill-or" type="submit">${c.btn} <i>›</i></button><span class="cf-msg" role="status"></span></div><p class="cf-note">${T.note}</p></form></div>`).join('');
+  document.body.appendChild(wrap);
+  let last = null;
+  const close = () => { wrap.classList.remove('on'); document.body.classList.remove('pcm-lock'); if (last) last.focus(); };
+  const open = (k, from) => {
+    if (!F[k]) return; last = from;
+    $$('.pcm-box', wrap).forEach(b => b.hidden = b.dataset.k !== k);
+    wrap.classList.add('on'); document.body.classList.add('pcm-lock');
+    const b = $(`.pcm-box[data-k="${k}"]`, wrap), r = from && from.dataset.pcrole;
+    if (r) { const s = $('select[name=role]', b); const o = s && [...s.options].find(x => x.text === r); if (o) s.value = o.value; }
+    setTimeout(() => { const i = $('input:not([disabled])', b); if (i) i.focus(); }, 60);
+  };
+  triggers.forEach(t => t.addEventListener('click', e => { e.preventDefault(); open(t.dataset.pcform, t); }));
+  wrap.addEventListener('click', e => { if (e.target === wrap || e.target.closest('.pcm-x')) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && wrap.classList.contains('on')) close(); });
+  const h = location.hash.slice(1); if (F[h]) open(h, null);
+})();
 $$('.cform').forEach(f => {
   const topic = $('#topic', f), p = new URLSearchParams(location.search).get('topic');
   if (topic && p && $(`option[value="${p}"]`, topic)) topic.value = p;
@@ -311,7 +364,7 @@ $$('.cform').forEach(f => {
     if (bad) { bad.focus(); msg.textContent = 'Please fill in ' + $('span', bad.closest('label')).textContent.toLowerCase() + '.'; msg.className = 'cf-msg bad'; return; }
     const d = Object.fromEntries(new FormData(f));
     const subject = f.dataset.subject || ('PlayCortex enquiry · ' + (topic ? topic.options[topic.selectedIndex].text : ''));
-    const LBL = { phone: 'WhatsApp', org: 'Organisation', size: 'Athletes', role: 'I am', interest: 'Interested in', sport: 'Sport', topic: 'Topic' };
+    const LBL = { phone: 'WhatsApp', org: 'Organisation', size: 'Athletes', role: 'I am', interest: 'Interested in', sport: 'Sport', topic: 'Topic', exp: 'Works at', city: 'City' };
     pcSave({ role: d.role || subject, name: (d.name || '').slice(0, 80), number: d.phone || '', topic: [subject, d.email || '', ...Object.keys(LBL).filter(k => d[k] && k !== 'phone' && k !== 'role').map(k => LBL[k] + ': ' + d[k]), d.message || ''].filter(Boolean).join(' | ').slice(0, 900) });
     msg.textContent = "Thanks, we've got it. We'll be in touch soon. You can also write to " + TO + '.'; msg.className = 'cf-msg ok';
     $$('input,textarea,select,button', f).forEach(x => x.disabled = true);
