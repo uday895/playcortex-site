@@ -760,3 +760,17 @@ $$('.xp-pb').forEach(sec => {
   bs.forEach((b, j) => b.addEventListener('click', () => { clearInterval(t); show(j); }));
   t = setInterval(() => show((i + 1) % bs.length), 6000);
 });
+
+/* academies: Ask Cortex console */
+$$('.ax').forEach(sec => {
+  const bs = $$('.ax-chips button', sec), cs = $$('.ax-card', sec), ask = $('.ax-ask', sec); let i = 0, t, typing;
+  const show = j => {
+    i = j; bs.forEach((b, k) => b.classList.toggle('on', k === j)); cs.forEach(c => c.classList.remove('on'));
+    ask.textContent = bs[j].textContent; sec.classList.add('typing'); clearTimeout(typing);
+    typing = setTimeout(() => { sec.classList.remove('typing'); cs[j].classList.add('on'); }, 650);
+  };
+  bs.forEach((b, j) => b.addEventListener('click', () => { clearInterval(t); show(j); }));
+  onView([sec], () => { show(0); t = setInterval(() => show((i + 1) % bs.length), 7000); }, .3);
+});
+/* experts: dry run plays once visible */
+onView($$('.dr'), el => el.classList.add('go'), .35);
