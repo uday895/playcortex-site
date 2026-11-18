@@ -18,7 +18,7 @@ onView($$('[data-count]'), el => {
   const to = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), st = performance.now(), D = 1400;
   const f = n => { const k = Math.min(1, (n - st) / D), v = to * (1 - Math.pow(1 - k, 3)); el.textContent = dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-IN'); if (k < 1) requestAnimationFrame(f); };
   requestAnimationFrame(f);
-}, .4);
+}, .1);
 
 /* bars / pipelines / stacks animate in */
 onView($$('#gap, .pipe, #stack'), el => el.classList.add('on'), .3);
@@ -774,3 +774,16 @@ $$('.ax').forEach(sec => {
 });
 /* experts: dry run plays once visible */
 onView($$('.dr'), el => el.classList.add('go'), .35);
+
+/* home: pilot scoreboard (count-up, bars, tabs) */
+$$('.sb').forEach(sec => {
+  const bs = $$('.sb-tabs button', sec), ps = $$('.sb-p', sec);
+  const run = () => { sec.classList.remove('go'); void sec.offsetWidth; requestAnimationFrame(() => sec.classList.add('go')); };
+  bs.forEach((b, j) => b.addEventListener('click', () => { bs.forEach((x, k) => x.classList.toggle('on', k === j)); ps.forEach((x, k) => x.classList.toggle('on', k === j)); run(); }));
+  onView([sec], () => {
+    run();
+    $$('.sb-n', sec).forEach(n => { const to = +n.dataset.to, t0 = performance.now();
+      const step = t => { const k = Math.min(1, (t - t0) / 1400); n.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step); });
+  }, .25);
+});
