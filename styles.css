@@ -3516,3 +3516,10 @@ button.cm-join{border:0;width:100%;text-align:left;font:inherit;cursor:pointer}
 @media (max-width:560px){.pcm-box{padding:26px 20px 22px;border-radius:20px}.pcm .fr2{grid-template-columns:1fr}}
 body.pcm-lock{overflow:hidden}
 .mnav-cta .btn{white-space:normal;text-align:center}
+/* v82 · KRU nav dropdown: athletes, academies, specialists */
+.mega.mega-1{width:340px;grid-template-columns:1fr;left:-14px}
+.mega .mega-ov{display:flex;justify-content:space-between;align-items:center;margin-top:4px;padding:12px 14px;border-top:1px solid var(--line);border-radius:0 0 10px 10px;font:600 13.5px var(--b);color:var(--ink2)}
+.mega .mega-ov:hover{color:var(--or)}
+.mega .mega-ov i{font-style:normal}
+.dd-btn{background:none;border:0;cursor:pointer}
+.sp-why{padding-bottom:clamp(64px,8vw,110px)!important}
