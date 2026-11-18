@@ -262,6 +262,41 @@ $$('.dg-scroll').forEach(sc => {
   fit(); new ResizeObserver(fit).observe(sc);
 });
 
+/* KRU button: opens a panel. What KRU does first, then academies and experts */
+(() => {
+  const dd = $('#dd'), btn = dd && $('.kru-btn', dd); if (!btn) return;
+  const hi = document.documentElement.lang === 'hi', p = hi ? '/hi' : '';
+  const T = hi ? {
+    k: 'KRU · हमारा पहला प्रोडक्ट', h: 'हर एथलीट तक एक्सपर्ट्स की पहुँच।',
+    d: 'टॉप एथलीटों के पीछे स्ट्रेंथ कोच, फ़िज़ियो, न्यूट्रिशनिस्ट और साइकोलॉजिस्ट होते हैं। KRU हर एथलीट को यही टीम एक चैट में देता है, असली एक्सपर्ट्स की बनाई और जाँची हुई, और ज़रूरत पड़ने पर उनसे सीधा जुड़ाव।',
+    team: ['S&C', 'फ़िज़ियो', 'न्यूट्रिशन', 'माइंड'], go: 'देखें KRU क्या करता है', ath: 'एथलीटों के लिए फ़ीचर्स',
+    or: 'या आप हैं', ak: 'अकादमियों के लिए', ah: 'हर खिलाड़ी को KRU दें', ad: 'आपके कोचों के लिए हर एथलीट का एक व्यू, एक्सपर्ट्स साथ में।',
+    ek: 'एक्सपर्ट्स के लिए', eh: 'आपका तरीका, हर एथलीट तक', ed: 'अपने नियम एक बार तय करें। KRU उन्हें रोज़ लागू करता है और ज़रूरत पर आपको बुलाता है।', close: 'बंद करें'
+  } : {
+    k: 'KRU · our first product', h: 'Expert access for every athlete.',
+    d: 'Top athletes have a strength coach, physio, nutritionist and psychologist behind them. KRU gives every athlete that team in one chat, built and checked by real experts, and connects them to a human expert when it matters.',
+    team: ['S&C', 'Physio', 'Nutrition', 'Mind'], go: 'See what KRU does', ath: 'Features for athletes',
+    or: 'Or are you', ak: 'For academies', ah: 'Give every player KRU', ad: 'One view of every athlete for your coaches, with experts on call.',
+    ek: 'For experts', eh: 'Your method, every athlete', ed: 'Set your rules once. KRU applies them every day and calls you in when it counts.', close: 'Close'
+  };
+  const s = document.createElement('div');
+  s.className = 'ks'; s.id = 'kruSheet'; s.setAttribute('role', 'dialog'); s.setAttribute('aria-label', 'KRU');
+  s.innerHTML = `<div class="ks-in">
+    <div class="ks-main"><div class="ks-copy"><span class="ks-k">${T.k}</span><h3>${T.h}</h3><p>${T.d}</p>
+      <div class="ks-cta"><a href="${p}/kru" class="pill pill-wt">${T.go} <i>›</i></a><a href="${p}/kru/features" class="ks-lk">${T.ath} ›</a></div></div>
+      <div class="ks-viz" aria-hidden="true"><span class="ka-orb" style="--s:92px"></span>${T.team.map((t, i) => `<em class="t${i}">${t}</em>`).join('')}</div></div>
+    <div class="ks-side"><span class="ks-or">${T.or}</span>
+      <a href="${p}/kru/academies" class="ks-c"><small>${T.ak}</small><b>${T.ah}</b><span>${T.ad}</span><i>›</i></a>
+      <a href="${p}/kru/experts" class="ks-c ks-ex"><small>${T.ek}</small><b>${T.eh}</b><span>${T.ed}</span><i>›</i></a></div>
+    <button class="ks-x" type="button" aria-label="${T.close}">×</button></div>`;
+  document.body.appendChild(s);
+  const set = o => { s.classList.toggle('on', o); dd.classList.toggle('op', o); btn.setAttribute('aria-expanded', o); document.body.classList.toggle('ks-open', o); };
+  btn.addEventListener('click', e => { e.stopPropagation(); set(!s.classList.contains('on')); });
+  $('.ks-x', s).addEventListener('click', () => set(false));
+  s.addEventListener('click', e => { if (e.target === s) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+})();
+
 /* mobile menu + product dropdown */
 (() => {
   const b = $('#burger'), m = $('#mnav'), dd = $('#dd');
@@ -269,7 +304,7 @@ $$('.dg-scroll').forEach(sc => {
     b.addEventListener('click', () => { m.classList.toggle('op'); b.classList.toggle('op'); });
     $$('a', m).forEach(a => a.addEventListener('click', () => { m.classList.remove('op'); b.classList.remove('op'); }));
   }
-  if (dd) {
+  if (dd && !$('.kru-btn', dd)) {
     $('button', dd).addEventListener('click', e => { e.stopPropagation(); dd.classList.toggle('op'); });
     document.addEventListener('click', e => { if (!dd.contains(e.target)) dd.classList.remove('op'); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') dd.classList.remove('op'); });
@@ -679,3 +714,39 @@ $$('.macc2').forEach(b => b.addEventListener('click', () => {
     requestAnimationFrame(step);
   }, 2300);
 })();
+
+/* Form check: live hip angle, reps, cues and spark line synced to the tracked video */
+$$('.fc-you').forEach(async pane => {
+  const v = $('video', pane); if (!v) return;
+  let D; try { D = await (await fetch(v.dataset.json)).json(); } catch (e) { return; }
+  const cues = (pane.dataset.cues || '').split('|'), hipv = $('.fc-hipv', pane), repv = $('.fc-repv', pane), cuev = $('.fc-cuev', pane),
+    kn = $('.fc-kn', pane), lo = $('.fc-lo', pane), path = $('.fc-path', pane);
+  const n = D.hip.length; let lastCue = -1, lastLock = null, peak = 0;
+  const tl = $$('.fc-tl li', pane.closest('.fc'));
+  const tick = () => {
+    const i = Math.min(n - 1, Math.max(0, Math.round(v.currentTime * D.fps)));
+    const h = D.hip[i]; hipv.textContent = h; kn.textContent = D.knee[i] + '°';
+    repv.textContent = Math.min(3, (D.rep[i] || 0) + (h < 150 ? 1 : 0)) || 1;
+    if (h > peak) peak = h;
+    if (i > 0 && D.rep[i] > D.rep[i - 1]) { lastLock = Math.max(...D.hip.slice(i, Math.min(n, i + 20))); }
+    lo.textContent = lastLock ? lastLock + '°' : '–';
+    const c = h < 95 ? 0 : h < 150 ? 1 : 2;
+    if (c !== lastCue) { lastCue = c; cuev.style.opacity = 0; setTimeout(() => { cuev.textContent = cues[c] || ''; cuev.style.opacity = 1; }, 140); }
+    const from = Math.max(0, i - 90), pts = [];
+    for (let k = from; k <= i; k++) pts.push(((k - from) / 90 * 200).toFixed(1) + ',' + (44 - (D.hip[k] - 40) / 140 * 44).toFixed(1));
+    path.setAttribute('d', 'M' + pts.join('L'));
+    if (tl.length) { const s = Math.floor(v.currentTime / (v.duration || 14) * tl.length) % tl.length; tl.forEach((li, j) => li.classList.toggle('on', j === s)); }
+    if (i === 0) lastLock = null;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }), { threshold: .2 }).observe(pane);
+});
+
+/* experts: playbook tabs */
+$$('.xp-pb').forEach(sec => {
+  const bs = $$('.xp-tabs button', sec), ps = $$('.xp-rules', sec); let i = 0, t;
+  const show = j => { i = j; bs.forEach((b, k) => b.classList.toggle('on', k === j)); ps.forEach((p, k) => p.classList.toggle('on', k === j)); };
+  bs.forEach((b, j) => b.addEventListener('click', () => { clearInterval(t); show(j); }));
+  t = setInterval(() => show((i + 1) % bs.length), 6000);
+});
