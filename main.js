@@ -715,28 +715,38 @@ $$('.macc2').forEach(b => b.addEventListener('click', () => {
   }, 2300);
 })();
 
-/* Form check: live hip angle, reps, cues and spark line synced to the tracked video */
+/* Form check: live hip angle, reps, cues, spark line and the standards card, synced to the tracked video */
 $$('.fc-you').forEach(async pane => {
   const v = $('video', pane); if (!v) return;
   let D; try { D = await (await fetch(v.dataset.json)).json(); } catch (e) { return; }
+  const sec = pane.closest('.fc'), stage = pane.closest('.fc-stage'), [OK, CL, SH] = (stage.dataset.lbl || 'Full|Close|Short').split('|');
   const cues = (pane.dataset.cues || '').split('|'), hipv = $('.fc-hipv', pane), repv = $('.fc-repv', pane), cuev = $('.fc-cuev', pane),
     kn = $('.fc-kn', pane), lo = $('.fc-lo', pane), path = $('.fc-path', pane);
-  const n = D.hip.length; let lastCue = -1, lastLock = null, peak = 0;
-  const tl = $$('.fc-tl li', pane.closest('.fc'));
+  const setup = $('.fs-setup', sec), reps = $$('.fs-r', sec), sum = $('.fs-sumv', sec), card = $('.fs-card', sec), tl = $$('.fc-tl li', sec);
+  const n = D.hip.length, total = D.total || 4; let lastCue = -1, shown = -1;
+  const grade = a => a >= 160 ? ['ok', OK] : a >= 150 ? ['cl', CL] : ['sh', SH];
   const tick = () => {
-    const i = Math.min(n - 1, Math.max(0, Math.round(v.currentTime * D.fps)));
-    const h = D.hip[i]; hipv.textContent = h; kn.textContent = D.knee[i] + '°';
-    repv.textContent = Math.min(3, (D.rep[i] || 0) + (h < 150 ? 1 : 0)) || 1;
-    if (h > peak) peak = h;
-    if (i > 0 && D.rep[i] > D.rep[i - 1]) { lastLock = Math.max(...D.hip.slice(i, Math.min(n, i + 20))); }
-    lo.textContent = lastLock ? lastLock + '°' : '–';
+    const i = Math.min(n - 1, Math.max(0, Math.round(v.currentTime * D.fps))), h = D.hip[i], r = D.rep[i] || 0;
+    hipv.textContent = h; kn.textContent = D.knee[i] + '°';
+    const inRep = h < 140 ? r + 1 : r; repv.textContent = Math.max(1, Math.min(total, inRep));
+    lo.textContent = r ? D.lock[r - 1] + '°' : '–';
     const c = h < 95 ? 0 : h < 150 ? 1 : 2;
     if (c !== lastCue) { lastCue = c; cuev.style.opacity = 0; setTimeout(() => { cuev.textContent = cues[c] || ''; cuev.style.opacity = 1; }, 140); }
     const from = Math.max(0, i - 90), pts = [];
     for (let k = from; k <= i; k++) pts.push(((k - from) / 90 * 200).toFixed(1) + ',' + (44 - (D.hip[k] - 40) / 140 * 44).toFixed(1));
     path.setAttribute('d', 'M' + pts.join('L'));
-    if (tl.length) { const s = Math.floor(v.currentTime / (v.duration || 14) * tl.length) % tl.length; tl.forEach((li, j) => li.classList.toggle('on', j === s)); }
-    if (i === 0) lastLock = null;
+    /* standards card */
+    if (setup) setup.textContent = Math.min(...D.hip.slice(0, Math.max(1, Math.min(i + 1, 40)))) + '° ✓';
+    if (r !== shown) {
+      shown = r;
+      reps.forEach((el, k) => {
+        const done = k < r, a = D.lock[k]; el.className = 'fs-r' + (done ? ' ' + grade(a)[0] : '') + (k === r ? ' cur' : '');
+        $('b', el).textContent = done ? a + '°' : '–'; $('em', el).textContent = done ? grade(a)[1] : '';
+      });
+      const fin = r >= total; card.classList.toggle('done', fin || r >= 2);
+      sum.textContent = r >= 2 ? sum.dataset.d : sum.dataset.w;
+    }
+    if (tl.length) { const s = Math.min(tl.length - 1, Math.floor(v.currentTime / ((v.duration || 14.4) / tl.length))); tl.forEach((li, j) => li.classList.toggle('on', j === s)); }
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
