@@ -3523,3 +3523,106 @@ body.pcm-lock{overflow:hidden}
 .mega .mega-ov i{font-style:normal}
 .dd-btn{background:none;border:0;cursor:pointer}
 .sp-why{padding-bottom:clamp(64px,8vw,110px)!important}
+
+/* =====================================================================
+   v83 · KRU design system (from "KRU app · interface changes", Nov 2026)
+   cool near-white pages, white cards with soft shadows, black pill CTAs,
+   orange as accent only, large consistent radii, tight heavy Montserrat
+   ===================================================================== */
+:root{
+  --bg:#F7F7F5; --paper:#FFFFFF; --card:#FFFFFF;
+  --line:#ECECEA; --line2:rgba(17,17,17,.06); --hair:#EFEFED; --out:#E4E4E2;
+  --ink:#111111; --ink2:#4A4A4A; --mt:#6B6B6B; --mt2:#9A9A9A;
+  --or:#F2652D; --or2:#FF5B1F; --or-ink:#C2410C; --peach:#FFF3EC; --tint:#FFEDE4;
+  --r:24px;
+  --sh1:0 1px 2px rgba(17,17,17,.03),0 0 0 1px rgba(17,17,17,.04);
+  --sh2:0 8px 24px rgba(17,17,17,.06),0 0 0 1px rgba(17,17,17,.035);
+}
+html,body{background:var(--bg)!important}
+body{color:var(--ink)}
+h1,h2,h3,.gx-line,.px-head h2,.sh h2{letter-spacing:-.03em!important}
+h1,h2,.px-head h2,.sh h2{font-weight:800!important}
+h3{letter-spacing:-.02em!important}
+::selection{background:#FFD9C7}
+
+/* sections sit on the page colour; cards are white */
+.px-sec,.steps3,.kx-sec,.acad,.hero,.page-hero,.px-hero,.pxf,section{background-color:transparent}
+.hero,.page-hero,.px-hero{background:transparent!important}
+#view.px-sec,.ac-steps{background:transparent!important}
+
+/* hero: radial orange glow from the top, no grid */
+.gx-hero{background:radial-gradient(120% 70% at 50% 0%,#FFD9C7 0%,#FFF3EC 45%,var(--bg) 82%)!important;border-bottom:0!important}
+.gx-hero::before{display:none!important}
+.pg-kru .page-hero,.pg-kru .px-hero,.ph-kru{background:radial-gradient(110% 60% at 50% 0%,#FFE6DA 0%,#FFF3EC 40%,var(--bg) 78%)!important}
+
+/* cards: white, large radius, soft shadow, no hard borders */
+.cm-stat,.kp3,.kp3-r,.bc,.dc,.cs-card,.s3,.c4,.f4,.cp,.cc,.hr,.prod-s,.cmp,.acv,.acv-t,.path,.pl-card,.ig-acc,.cform,.acad-talk .contg,.proof-c,.px-sec .card,.oc,.jc,.lb,.legal .box,.cn,.im,.il,.dg,.f4c,.fs2,.inside,.acc-i,.kp,.pbox{
+  background:#fff!important;border-color:transparent!important;box-shadow:var(--sh1)!important;border-radius:var(--r)!important}
+.prod-s,.acv,.cform,.acad-talk .contg,.cmp{box-shadow:var(--sh2)!important}
+.acv-t,.kp3-r{border-radius:16px!important;box-shadow:none!important;background:#F7F7F5!important}
+.bc:hover,.dc:hover,.cs-card:hover,.path:hover,.kp3:hover{box-shadow:var(--sh2)!important}
+.ig-t,.ldr img,.tn img,.oc-art,.px-shot,.fx-stage,.dsk{border-radius:20px!important}
+.cm-join{border-radius:var(--r)!important;box-shadow:var(--sh2)}
+.s3.on,.s3.act{box-shadow:0 0 0 2px var(--or),var(--sh2)!important}
+
+/* buttons: black main pill, white outline pill secondary */
+.pill,.pill-sm,.pill-or,.pill-ln,.pill-wt,.pill-dk,.pill-s,.pill-new,.btn,.btn-l,.btn-k,.cta-row a,.mnav-cta a,.cm-join .pill,.badge-p{border-radius:999px!important}
+.pill{font-weight:600!important}
+.pill-or,.btn-k,.btn-o{background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important}
+.pill-or:hover,.btn-k:hover,.btn-o:hover{background:#2A2A2A!important;border-color:#2A2A2A!important}
+.pill-or i,.btn-k i{color:var(--or2);font-style:normal}
+.pill-ln,.btn-l,.pill-sm.pill-ln{background:#fff!important;color:var(--ink)!important;border:1px solid var(--out)!important}
+.pill-ln:hover,.btn-l:hover{border-color:var(--ink)!important;background:#fff!important;color:var(--ink)!important}
+.pill-wt{background:#fff!important;color:var(--ink)!important}
+.pill:not(.pill-sm){min-height:48px}
+.cm-join{background:var(--ink)!important;color:#fff}
+.cm-join small{color:var(--or2)!important}
+.cm-join p{color:rgba(255,255,255,.72)!important}
+
+/* nav: white floating bar with large radius */
+.nav{border-radius:20px!important;background:rgba(255,255,255,.92)!important;box-shadow:var(--sh2)!important;border:0!important;backdrop-filter:saturate(1.4) blur(12px)}
+.mnav{border-radius:24px!important;box-shadow:var(--sh2)!important;border:0!important}
+.mega{border-radius:22px!important;box-shadow:0 20px 50px -18px rgba(17,17,17,.22),0 0 0 1px rgba(17,17,17,.04)!important;border:0!important}
+.nav-links>a,.nav-links .dd-btn,.burger{border-radius:999px!important}
+.nav-links>a.on,.nav-links>a:hover,.nav-links .dd-btn:hover,.dd.op .dd-btn{background:#F2F2F0!important;color:var(--ink)!important}
+.mi{background:var(--peach)!important;color:var(--or)!important;border-radius:12px!important}
+.nav-kru .brand b{font-weight:800!important;letter-spacing:-.03em}
+.nav-kru .brand::after{content:"by PlayCortex";font:500 11px var(--b);color:var(--mt);margin-left:6px;letter-spacing:0;align-self:flex-end;padding-bottom:3px}
+.nav-kru .brand{display:inline-flex;align-items:baseline}
+
+/* chips, tags and labels: orange tint */
+.pl-tag,.ig-ty,.ch-tag,.hf-tags span,.pr-chip-tags span,.cc-sp span,.tag-live,.live,.px-badge span{border-radius:999px!important}
+.pl-tag,.ch-tag,.hf-tags span{background:var(--peach)!important;color:var(--or-ink)!important}
+.gx-k,.path-k,.pcm-k,.pn{color:var(--or)!important}
+.pill-new{border-color:var(--out)!important}
+
+/* forms */
+.cform input,.cform select,.cform textarea,.pcm .cform input,.pcm .cform select,.pcm .cform textarea{background:#F7F7F5!important;border:1px solid transparent!important;border-radius:14px!important}
+.cform input:focus,.cform select:focus,.cform textarea:focus{background:#fff!important;border-color:var(--or)!important;box-shadow:0 0 0 3px rgba(242,101,45,.14)!important}
+.pcm-box{border-radius:28px!important}
+.pcm-x{border-color:var(--out)!important}
+
+/* footer: light, card style */
+.pxf{background:transparent!important}
+.pxf-blk{background:#fff!important;color:var(--ink)!important;border:0!important;border-radius:28px!important;margin:0 16px!important;box-shadow:var(--sh1)!important;padding:40px 0 30px!important}
+.pxf-help>b{color:var(--ink)!important;font-weight:800!important;letter-spacing:-.02em}
+.pxf-hl a,.pxf .c a,.pxf-blk .c a{color:var(--ink)!important}
+.pxf-hl a:hover,.pxf .c a:hover,.pxf-blk .c a:hover{color:var(--or)!important}
+.pxf-blk h6{color:var(--mt2)!important}
+.pxf-soc a{border-radius:12px!important;background:#F7F7F5!important;color:var(--ink)!important;border:0!important}
+.pxf-soc a svg{fill:var(--ink)!important}
+.pxf-lang select{border-radius:999px!important;background:#F7F7F5!important;color:var(--ink)!important;border:1px solid transparent!important}
+.pxf-dis,.pxf-copy{color:var(--mt)!important}
+
+/* hairline dividers */
+hr,.hl{border-color:var(--hair)!important}
+/* v83 fixes */
+.kp3{background:transparent!important;box-shadow:none!important;border-radius:0!important}
+.kp3-r{background:#fff!important;border-radius:var(--r)!important;box-shadow:var(--sh2)!important}
+.pxf .c h6,.pxf-blk h6{color:var(--mt2)!important}
+.pxf-soc a svg{fill:none!important;stroke:var(--ink)!important;stroke-width:1.8}
+.pxf-soc a[href*="linkedin"] svg{fill:var(--ink)!important;stroke:none!important}
+.pxf-soc a svg circle[fill]{fill:var(--ink)!important}
+.ph-kru,.pg-kru .px-hero{border-bottom:0!important}
+.feats,.acad-talk,.contact,.story,.legal-page{background:transparent!important}
+.pg-kru header.kp{background:radial-gradient(110% 60% at 50% 0%,#FFE6DA 0%,#FFF3EC 40%,var(--bg) 78%)!important}
