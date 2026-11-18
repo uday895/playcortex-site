@@ -3823,3 +3823,4 @@ html body .acc-r{border-radius:28px!important}
 .mg-c small{font:500 12.5px/1.45 var(--b);color:var(--mt)}
 .mg-c i{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;font-style:normal;font-weight:700;box-shadow:0 0 0 1px #E4E4E2}
 .mg-c:hover i{background:#111;color:#fff;box-shadow:none}
+.pg-kru .kp-stage.ka-trio{align-items:flex-start!important;padding-top:4px}
