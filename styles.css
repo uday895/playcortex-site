@@ -4833,3 +4833,17 @@ section.dr{display:block!important;grid-template-columns:none!important;padding:
   .xl-id{flex-wrap:wrap;align-items:flex-end}.xl-id>div{flex:1;min-width:0;padding-top:36px}.xl-ver{margin-left:78px}
   .xn-c{padding:18px 18px 20px}.xn-c b{font-size:19px}
 }
+
+/* v91 · two-row testimonial wall */
+.sbq .sb-tick+.sb-tick{margin-top:14px!important}
+.sbq .sb-track{align-items:flex-start;animation-duration:80s}
+.sbq .sb-rev .sb-track{animation-direction:reverse;animation-duration:90s}
+.sbq .sb-q{width:auto;max-width:430px;min-width:260px}
+.sbq .sb-rev .sb-q:nth-child(even){background:#fff;color:#111;border-radius:22px 22px 22px 6px}
+.sbq .sb-rev .sb-q:nth-child(odd){background:#1F1F1D;color:#fff;border-radius:22px 22px 6px 22px}
+.sb-gl{margin:6px 0 0;font:500 13px/1.45 var(--b);opacity:.7;font-style:italic}
+.sb-tag{display:inline-block;font:800 9.5px var(--b);letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:rgba(0,0,0,.07);margin-right:8px;vertical-align:1px}
+.sb-q:nth-child(even) .sb-tag,.sbq .sb-rev .sb-q:nth-child(odd) .sb-tag{background:rgba(255,255,255,.18)}
+.sbq .sb-rev .sb-q:nth-child(even) .sb-tag{background:rgba(0,0,0,.07)}
+@media (max-width:640px){.sbq .sb-q{max-width:300px;min-width:230px}.sbq .sb-track{animation-duration:70s}}
+@media (prefers-reduced-motion:reduce){.sbq .sb-track{animation:none}.sbq .sb-tick{overflow-x:auto}}
