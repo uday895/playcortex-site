@@ -4836,8 +4836,8 @@ section.dr{display:block!important;grid-template-columns:none!important;padding:
 
 /* v91 · two-row testimonial wall */
 .sbq .sb-tick+.sb-tick{margin-top:14px!important}
-.sbq .sb-track{align-items:flex-start;animation-duration:80s}
-.sbq .sb-rev .sb-track{animation-direction:reverse;animation-duration:90s}
+.sbq .sb-track{align-items:flex-start;animation-duration:60s}
+.sbq .sb-rev .sb-track{animation-direction:reverse;animation-duration:66s}
 .sbq .sb-q{width:auto;max-width:430px;min-width:260px}
 .sbq .sb-rev .sb-q:nth-child(even){background:#fff;color:#111;border-radius:22px 22px 22px 6px}
 .sbq .sb-rev .sb-q:nth-child(odd){background:#1F1F1D;color:#fff;border-radius:22px 22px 6px 22px}
