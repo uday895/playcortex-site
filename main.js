@@ -787,3 +787,89 @@ $$('.sb').forEach(sec => {
       requestAnimationFrame(step); });
   }, .25);
 });
+
+/* v90 · How it works */
+(() => {
+  const box = document.getElementById('hw'); if (!box) return;
+  const btns = [...box.querySelectorAll('.hw-i')], views = [...box.querySelectorAll('.hw-v')], cap = box.querySelector('.hw-cap');
+  const DUR = [7000, 6500, 8000, 7000];
+  let i = 0, tm = null, started = false;
+  const show = (n, user) => {
+    i = n;
+    btns.forEach((b, j) => { b.classList.toggle('on', j === n); b.setAttribute('aria-pressed', j === n); b.style.setProperty('--hwt', DUR[j] + 'ms'); const p = b.querySelector('.hw-p i'); if (p) { p.style.animation = 'none'; p.offsetWidth; p.style.animation = ''; } });
+    views.forEach((v, j) => { v.classList.toggle('on', j === n); v.classList.remove('play'); });
+    void views[n].offsetWidth; requestAnimationFrame(() => views[n].classList.add('play'));
+    const t = btns[n].querySelector('.hw-t'); if (cap && t) cap.innerHTML = t.innerHTML;
+    clearTimeout(tm); tm = setTimeout(() => show((i + 1) % btns.length), DUR[n] + (user ? 4000 : 0));
+  };
+  btns.forEach((b, j) => b.addEventListener('click', () => show(j, true)));
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !started) { started = true; show(0); }
+    else if (!e.isIntersecting && started) { clearTimeout(tm); box.classList.add('paused'); }
+    else if (e.isIntersecting) { box.classList.remove('paused'); show(i); }
+  }), { threshold: .25 });
+  io.observe(box);
+})();
+
+/* v90 · form check steps as buttons */
+(() => {
+  document.querySelectorAll('.fc-tl').forEach(ol => {
+    const sec = ol.closest('section'), v = sec && sec.querySelector('video'), lis = [...ol.querySelectorAll('li')];
+    const cap = document.createElement('p'); cap.className = 'fc-tld'; cap.setAttribute('aria-live', 'polite'); ol.after(cap);
+    const sync = () => { const on = ol.querySelector('li.on') || lis[0]; const s = on && on.querySelector('span'); if (s && cap.textContent !== s.textContent) cap.textContent = s.textContent; };
+    lis.forEach((li, i) => {
+      li.setAttribute('role', 'button'); li.tabIndex = 0;
+      const go = () => {
+        lis.forEach((x, j) => x.classList.toggle('on', j === i));
+        if (v) { const d = v.duration || 14.4; try { v.currentTime = i * d / lis.length + .05; v.play().catch(() => {}); } catch (e) {} }
+        sync();
+      };
+      li.addEventListener('click', go);
+      li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    sync(); setInterval(sync, 400);
+  });
+})();
+
+/* v90 · academies goals + reports */
+(() => {
+  const type = (el, done) => { const full = el.dataset.t || el.textContent; el.textContent = ''; el.classList.add('typing'); let k = 0;
+    const tick = () => { k += 2; el.textContent = full.slice(0, k); if (k < full.length) el._t = setTimeout(tick, 28); else { el.classList.remove('typing'); done && done(); } }; clearTimeout(el._t); tick(); };
+  const ag = document.getElementById('goals');
+  if (ag) {
+    const bs = [...ag.querySelectorAll('.ag-chips button')], ps = [...ag.querySelectorAll('.ag-p')]; let cur = 0, tm, seen = false;
+    const show = (i, user) => { cur = i; bs.forEach((b, j) => b.classList.toggle('on', j === i)); ps.forEach((p, j) => { p.classList.toggle('on', j === i); p.classList.remove('go'); });
+      const p = ps[i]; type(p.querySelector('.ag-type'), () => setTimeout(() => p.classList.add('go'), 250));
+      clearTimeout(tm); tm = setTimeout(() => show((cur + 1) % ps.length), user ? 14000 : 9000); };
+    bs.forEach((b, j) => b.addEventListener('click', () => show(j, true)));
+    new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !seen) { seen = true; show(0); } }), { threshold: .3 }).observe(ag);
+  }
+  const ar = document.querySelector('#reports .ar-box');
+  if (ar) {
+    const bs = [...ar.querySelectorAll('.ar-tabs button')], ps = [...ar.querySelectorAll('.ar-p')], vs = [...ar.querySelectorAll('.ar-vt')]; let seen = false, tm;
+    const show = (i, user) => { ar.classList.remove('said'); [bs, ps, vs].forEach(a => a.forEach((x, j) => x.classList.toggle('on', j === i)));
+      const tr = vs[i].querySelector('.ar-tr'); if (!tr.dataset.t) tr.dataset.t = tr.textContent;
+      type(tr, () => setTimeout(() => ar.classList.add('said'), 300));
+      clearTimeout(tm); tm = setTimeout(() => show((i + 1) % bs.length), user ? 16000 : 10000); };
+    bs.forEach((b, j) => b.addEventListener('click', () => show(j, true)));
+    new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !seen) { seen = true; show(0); } }), { threshold: .3 }).observe(ar);
+  }
+})();
+
+/* v90 · experts pillars */
+(() => {
+  const type = (el, done) => { const full = el.dataset.t || el.textContent; el.textContent = ''; el.classList.add('typing'); let k = 0;
+    const tick = () => { k += 2; el.textContent = full.slice(0, k); if (k < full.length) el._t = setTimeout(tick, 22); else { el.classList.remove('typing'); done && done(); } }; clearTimeout(el._t); tick(); };
+  const once = (el, fn, th = .3) => { if (!el) return; let s = false; new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !s) { s = true; fn(); } }), { threshold: th }).observe(el); };
+  const msg = document.querySelector('#management .xm-msg');
+  once(msg, () => { const loop = () => { msg.classList.remove('sent'); type(msg.querySelector('.xm-tx'), () => setTimeout(() => { msg.classList.add('sent'); setTimeout(loop, 9000); }, 600)); }; loop(); });
+  const xc = document.querySelector('#cross-agent .xc-box');
+  if (xc) {
+    const bs = [...xc.querySelectorAll('.xc-tabs button')], ps = [...xc.querySelectorAll('.xc-p')]; let tm;
+    const show = (i, user) => { bs.forEach((b, j) => b.classList.toggle('on', j === i)); ps.forEach((p, j) => { p.classList.toggle('on', j === i); p.classList.remove('go'); });
+      type(ps[i].querySelector('.xc-type'), () => setTimeout(() => ps[i].classList.add('go'), 200));
+      clearTimeout(tm); tm = setTimeout(() => show((i + 1) % ps.length), user ? 14000 : 9000); };
+    bs.forEach((b, j) => b.addEventListener('click', () => show(j, true)));
+    once(xc, () => show(0));
+  }
+})();
